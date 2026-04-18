@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 13 - Buy And Sell Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #f7f2eb;
+      --paper: #fffdfa;
+      --ink: #241a16;
+      --muted: #6f625d;
+      --frame: #6d625d;
+      --line: #e9dfd7;
+      --header-bg: #f7f6f4;
+      --field-border: #d9d3cd;
+      --shadow: 0 8px 18px rgba(53, 32, 21, 0.08);
+      --buy: #f5a120;
+      --sell: #2f8a39;
+      --card: #9be2dd;
+      --button: #f3ecff;
+      --danger: #a53a31;
+      --nav-accent: #e0a72c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(243, 228, 214, 0.76), rgba(255, 255, 255, 0) 8%, rgba(255, 255, 255, 0) 92%, rgba(243, 228, 214, 0.76)),
+        var(--page-bg);
+    }
+
+    .page {
+      width: min(1280px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 18px 0 32px;
+    }
+
+    .sheet {
+      min-height: 740px;
+      background: var(--paper);
+      border-top: 4px solid #efe4da;
+      border-bottom: 4px solid #d9ccc0;
+      box-shadow: 0 3px 12px rgba(57, 35, 21, 0.08);
+      padding: 58px 34px 64px;
+    }
+
+    .heading {
+      max-width: 760px;
+      margin: 0 auto 14px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .phones {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      max-width: 378px;
+      margin: 0 auto 14px;
+    }
+
+    .phone {
+      position: relative;
+      width: 184px;
+      min-height: 360px;
+      border: 2px solid var(--frame);
+      background: #fff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .phone-header {
+      min-height: 26px;
+      padding: 6px 8px 4px;
+      border-bottom: 1px solid var(--line);
+      background: var(--header-bg);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 1px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #2d211c;
+      text-transform: uppercase;
+      transform: skewX(-10deg);
+      letter-spacing: 0.15px;
+    }
+
+    .brand-mark .accent {
+      color: #ea6a30;
+    }
+
+    .info {
+      color: #8b817c;
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    .content {
+      padding: 8px 8px 36px;
+      background: linear-gradient(180deg, #ffffff 0 88%, #f5f4f3 88% 100%);
+      min-height: 332px;
+    }
+
+    .title {
+      margin: 0 0 8px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #4b403c;
+    }
+
+    .toggle-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .pill {
+      min-width: 54px;
+      min-height: 20px;
+      border: 0;
+      border-radius: 4px;
+      color: #fff;
+      font: 600 7px/1 "Poppins", sans-serif;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(50, 34, 24, 0.1);
+    }
+
+    .pill.buy {
+      background: var(--buy);
+    }
+
+    .pill.sell {
+      background: var(--sell);
+    }
+
+    .pill.inactive {
+      opacity: 0.72;
+    }
+
+    .vehicle-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .vehicle-card {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 8px;
+      background: var(--card);
+      border-radius: 4px;
+      padding: 6px;
+      box-shadow: 0 4px 10px rgba(54, 103, 99, 0.12);
+    }
+
+    .vehicle-photo {
+      border-radius: 2px;
+      background:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0)),
+        linear-gradient(180deg, #54443d, #1d1715);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vehicle-photo::after {
+      content: "";
+      position: absolute;
+      inset: 8px 12px;
+      border-radius: 999px 999px 6px 6px;
+      background: linear-gradient(180deg, #fba83a, #cb452f);
+      transform: rotate(-8deg);
+      opacity: 0.9;
+    }
+
+    .vehicle-photo.truck::after {
+      inset: 12px 8px;
+      border-radius: 6px;
+      background: linear-gradient(180deg, #ca1f28, #7f1116);
+    }
+
+    .vehicle-meta {
+      font-size: 6.2px;
+      line-height: 1.45;
+      color: #3e3c3a;
+      text-align: center;
+    }
+
+    .interest-btn {
+      margin-top: 6px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--button);
+      color: #8b7385;
+      padding: 3px 8px;
+      font: 600 6px/1 "Poppins", sans-serif;
+      cursor: pointer;
+    }
+
+    .field {
+      margin-bottom: 6px;
+    }
+
+    .field input {
+      width: 100%;
+      min-height: 22px;
+      border: 2px solid var(--field-border);
+      border-radius: 4px;
+      background: #fff;
+      padding: 5px 7px;
+      font: 500 8px/1.2 "Poppins", sans-serif;
+      color: #6b615c;
+      outline: none;
+    }
+
+    .upload-title {
+      margin: 10px 0 6px;
+      font-size: 8px;
+      font-weight: 700;
+      color: #544944;
+    }
+
+    .upload-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .upload-item {
+      text-align: center;
+    }
+
+    .upload-item span {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 5.6px;
+      color: #756a64;
+    }
+
+    .upload-box {
+      height: 42px;
+      border: 2px solid #d9dff0;
+      border-radius: 4px;
+      background: #eef5ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5f6f8a;
+      font-size: 12px;
+    }
+
+    .save-btn {
+      display: block;
+      width: 64px;
+      min-height: 18px;
+      margin: 0 auto;
+      border: 0;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #ff6a58, #f04a39);
+      color: #fff;
+      font: 600 6.5px/1 "Poppins", sans-serif;
+      cursor: pointer;
+    }
+
+    .nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 34px;
+      background: #f6f4f4;
+      border-top: 1px solid #ece7e2;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      color: #8a817c;
+      font-size: 6px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .nav-item.active {
+      color: var(--nav-accent);
+      font-weight: 700;
+    }
+
+    .captcha {
+      position: absolute;
+      right: 4px;
+      bottom: 4px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid #dcdcdc;
+      background:
+        linear-gradient(135deg, #ffffff 35%, #e7f1ff 35% 62%, #ffffff 62%),
+        #fff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    .notes {
+      max-width: 760px;
+      margin: 0 auto;
+      padding-left: 26px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .notes li {
+      margin-bottom: 6px;
+    }
+
+    .highlight {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    .sub-list {
+      margin-top: 4px;
+      padding-left: 24px;
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .heading,
+      .notes {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 12px, 100%);
+        padding-top: 10px;
+      }
+
+      .sheet {
+        padding: 24px 12px 28px;
+      }
+
+      .heading,
+      .notes {
+        font-size: 13px;
+      }
+
+      .phones {
+        grid-template-columns: 1fr;
+        max-width: 184px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="sheet">
+      <h1 class="heading"> 5. Buy and Sell Platform:</h1>
+
+      <div class="phones">
+        <article class="phone">
+          <div class="phone-header">
+            <div class="brand-mark">
+              <span>Tran</span><span class="accent">S</span><span>Maa</span>
+            </div>
+            <span class="info">&#9432;</span>
+          </div>
+
+          <div class="content">
+            <h2 class="title">Commercial Vehicles</h2>
+
+            <div class="toggle-row">
+              <button class="pill buy" id="buyTabBtn" type="button">BUY</button>
+              <button class="pill sell inactive" id="sellTabBtn" type="button">SELL</button>
+            </div>
+
+            <div class="vehicle-list">
+              <div class="vehicle-card">
+                <div class="vehicle-photo"></div>
+                <div class="vehicle-meta">
+                  kia<br>
+                  Vehicle Model:<br>
+                  carival<br>
+                  Years of Vehicle:<br>
+                  2021
+                  <div><button class="interest-btn" type="button">Interested to buy</button></div>
+                </div>
+              </div>
+
+              <div class="vehicle-card">
+                <div class="vehicle-photo"></div>
+                <div class="vehicle-meta">
+                  mahindra<br>
+                  Vehicle Model:<br>
+                  tuv300<br>
+                  Years of Vehicle:<br>
+                  2017
+                  <div><button class="interest-btn" type="button">Interested to buy</button></div>
+                </div>
+              </div>
+
+              <div class="vehicle-card">
+                <div class="vehicle-photo truck"></div>
+                <div class="vehicle-meta">
+                  tata<br>
+                  Vehicle Model:<br>
+                  alto<br>
+                  Years of Vehicle:<br>
+                  2017
+                  <div><button class="interest-btn" type="button">Interested to buy</button></div>
+                </div>
+              </div>
+
+              <div class="vehicle-card">
+                <div class="vehicle-photo"></div>
+                <div class="vehicle-meta">
+                  mahindra<br>
+                  Vehicle Model:<br>
+                  xuv<br>
+                  Years of Vehicle:<br>
+                  2019
+                  <div><button class="interest-btn" type="button">Interested to buy</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav">
+              <div class="nav-item"><span>&#128666;</span><span> Loads</span></div>
+              <div class="nav-item active"><span>&#128663;</span><span>Sell & Buy</span></div>
+              <div class="nav-item"><span>&#128214;</span><span>Innance & <br>insurance </span></div>
+              <div class="nav-item"><span>&#128100;</span><span>Fuel</span></div>
+              <div class="nav-item"><span>&#8962;</span><span>Home</span></div>
+          </div>
+          <div class="captcha" aria-show="true"></div>
+        </article>
+
+        <article class="phone">
+          <div class="phone-header">
+            <div class="brand-mark">
+              <span>Tran</span><span class="accent">S</span><span>Maa</span>
+            </div>
+            <span class="info">&#9432;</span>
+          </div>
+
+          <div class="content">
+            <h2 class="title">Commercial Vehicles</h2>
+
+            <div class="toggle-row">
+              <button class="pill buy inactive" id="buyTabBtnRight" type="button">BUY</button>
+              <button class="pill sell" id="sellTabBtnRight" type="button">SELL</button>
+            </div>
+
+            <form id="sellForm">
+              <div class="field"><input type="text" id="sellerName" placeholder="Name" aria-label="Name"></div>
+              <div class="field"><input type="tel" id="sellerPhone" placeholder="Phone Number" aria-label="Phone Number"></div>
+              <div class="field"><input type="text" id="vehicleNo" placeholder="Vehicle No" aria-label="Vehicle Number"></div>
+              <div class="field"><input type="text" id="vehicleModel" placeholder="Vehicle Model" aria-label="Vehicle Model"></div>
+              <div class="field"><input type="text" id="rcNo" placeholder="RC No" aria-label="RC Number"></div>
+              <div class="field"><input type="text" id="vehicleYears" placeholder="Years of Vehicle" aria-label="Years of Vehicle"></div>
+
+              <div class="upload-title">Upload Images</div>
+              <div class="upload-grid">
+                <div class="upload-item">
+                  <span>Front side</span>
+                  <div class="upload-box">&#128247;</div>
+                </div>
+                <div class="upload-item">
+                  <span>Back side</span>
+                  <div class="upload-box">&#128247;</div>
+                </div>
+                <div class="upload-item">
+                  <span>Right side</span>
+                  <div class="upload-box">&#128247;</div>
+                </div>
+                <div class="upload-item">
+                  <span>Left side</span>
+                  <div class="upload-box">&#128247;</div>
+                </div>
+              </div>
+
+              <button class="save-btn" type="submit">Save Data</button>
+            </form>
+          </div>
+
+          <div class="nav">
+              <div class="nav-item"><span>&#128666;</span><span>Loads</span></div>
+              <div class="nav-item active"><span>&#128663;</span>Sell & Buy<span></span></div>
+              <div class="nav-item"><span>&#128214;</span><span>Finance & <br> insurance</span></div>
+              <div class="nav-item"><span>&#128100;</span><span>Fuel</span></div>
+              <div class="nav-item"><span>&#8962;</span><span>Home</span></div>
+            </div>
+          <div class="captcha" aria-hidden="true"></div>
+        </article>
+      </div>
+
+      <ul class="notes">
+        <li>Customers and drivers can sell their vehicles by uploading vehicle <br> photos and details like the RC Number and contact information.
+          <div class="sub-list">1. Give full details collected</div>
+          <div class="sub-list">2. How many photos will be uploaded? <span style="color:#1d1715; font-weight:300;" > (4 photos including <br> front back, left, right sides of vehicle)</span> </div>
+          <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.</div>
+        </li>
+        <li>Transmaa verifies the uploaded vehicle information and lists it on <br> the "Buy" page.
+          <div class="sub-list">1. What information is displayed?</div>
+        </li>
+        <li>Interested buyers can view vehicles on the "Buy" page and indicate <br> their interest.
+          <div class="sub-list">1. How will Transmaa get the information?</div>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    const buyTabBtn = document.getElementById("buyTabBtn");
+    const sellTabBtn = document.getElementById("sellTabBtn");
+    const buyTabBtnRight = document.getElementById("buyTabBtnRight");
+    const sellTabBtnRight = document.getElementById("sellTabBtnRight");
+    const interestButtons = Array.from(document.querySelectorAll(".interest-btn"));
+    const sellForm = document.getElementById("sellForm");
+
+    function setActive(primary, secondary, primaryClass, secondaryClass) {
+      primary.className = "pill " + primaryClass;
+      secondary.className = "pill " + secondaryClass + " inactive";
+    }
+
+    buyTabBtn.addEventListener("click", function() {
+      setActive(buyTabBtn, sellTabBtn, "buy", "sell");
+    });
+
+    sellTabBtn.addEventListener("click", function() {
+      setActive(sellTabBtn, buyTabBtn, "sell", "buy");
+    });
+
+    buyTabBtnRight.addEventListener("click", function() {
+      setActive(buyTabBtnRight, sellTabBtnRight, "buy", "sell");
+    });
+
+    sellTabBtnRight.addEventListener("click", function() {
+      setActive(sellTabBtnRight, buyTabBtnRight, "sell", "buy");
+    });
+
+    interestButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        alert("Interest sent to Transmaa.");
+      });
+    });
+
+    sellForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      alert("Vehicle details saved successfully.");
+    });
+  </script>
+</body>
+</html>

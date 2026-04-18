@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 6 - Driver Login And Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #f7f2eb;
+      --paper: #fffdfa;
+      --paper-edge: #ecdccf;
+      --text: #181312;
+      --muted: #605651;
+      --accent: #ff9700;
+      --accent-soft: #fbd6c8;
+      --accent-fade: #fdeae1;
+      --otp-box: #f7b7c3;
+      --line: rgba(110, 81, 61, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(90deg, rgba(241, 226, 210, 0.7), rgba(255, 255, 255, 0) 8%, rgba(255, 255, 255, 0) 92%, rgba(241, 226, 210, 0.7)),
+        var(--page-bg);
+    }
+
+    .page {
+      width: min(1280px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 26px 0 40px;
+    }
+
+    .sheet {
+      background: var(--paper);
+      border-top: 4px solid #efe5db;
+      border-bottom: 4px solid #dccfc2;
+      box-shadow: 0 4px 12px rgba(59, 38, 24, 0.08);
+      min-height: 520px;
+    }
+
+    .sheet + .sheet {
+      margin-top: 16px;
+    }
+
+    .top-copy {
+      padding: 54px 64px 70px;
+    }
+
+    .top-copy h2,
+    .bottom-copy h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+
+    .top-copy ul,
+    .bottom-copy ul {
+      margin: 0;
+      padding-left: 34px;
+      max-width: 980px;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .top-copy li,
+    .bottom-copy li {
+      margin-bottom: 8px;
+    }
+
+    .showcase {
+      padding: 56px 54px 62px;
+    }
+
+    .phones {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .phone {
+      width: 230px;
+      min-height: 410px;
+      background: #fff;
+      border: 3px solid #4a413e;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .phone-top {
+      height: 158px;
+      background: linear-gradient(180deg, var(--accent-soft), #f9d1c4);
+      padding: 12px 12px 16px;
+    }
+
+    .back {
+      font-size: 22px;
+      line-height: 1;
+      color: #4f4742;
+    }
+
+    .brand {
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 2px;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: #1f1a19;
+      transform: skewX(-10deg);
+    }
+
+    .brand-mark .accent {
+      color: #f05a29;
+    }
+
+    .brand h3 {
+      margin: 12px 0 4px;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.45;
+      color: #645d58;
+    }
+
+    .phone-body {
+      padding: 18px 10px 52px;
+      text-align: center;
+      position: relative;
+      min-height: 252px;
+    }
+
+    .phone-body h4 {
+      margin: 0 0 14px;
+      font-size: 15px;
+    }
+
+    .mobile-field {
+      display: flex;
+      align-items: center;
+      border: 2px solid #eed8ba;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 36px;
+      background: #fff;
+    }
+
+    .country {
+      width: 36px;
+      border-right: 1px solid #eadfce;
+      color: #81756f;
+      font-size: 11px;
+      line-height: 36px;
+    }
+
+    .number-icon {
+      width: 28px;
+      color: #5b514c;
+      font-size: 14px;
+    }
+
+    .mobile-field input {
+      border: 0;
+      outline: none;
+      width: 100%;
+      font: 500 11px/1 "Poppins", sans-serif;
+      color: #4b413b;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #9b8f88;
+      font-size: 11px;
+      margin: 12px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: #ecdccf;
+    }
+
+    .link {
+      color: #675d58;
+      font-size: 11px;
+      text-decoration: underline;
+    }
+
+    .otp-title {
+      margin-top: 18px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .otp-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .otp-box {
+      width: 28px;
+      height: 34px;
+      border-radius: 3px;
+      background: var(--otp-box);
+      border: 0;
+      outline: none;
+      color: #7d4a53;
+      display: block;
+      text-align: center;
+      font: 600 16px/34px "Poppins", sans-serif;
+      padding: 0;
+    }
+
+    .otp-box:focus {
+      background: #f6a7b5;
+      box-shadow: 0 0 0 2px rgba(240, 90, 41, 0.22);
+    }
+
+    .otp-meta {
+      margin-top: 12px;
+      color: #ef9aa8;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .resend {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 0;
+      background: #f7f0ed;
+      color: #c2b7b0;
+      font-size: 9px;
+      cursor: pointer;
+    }
+
+    .resend.active {
+      background: #ffe6e0;
+      color: #e0808d;
+    }
+
+    .send-otp {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #ffa318, #f48b00);
+      color: #fff;
+      height: 18px;
+      font: 600 10px/1 "Poppins", sans-serif;
+      cursor: pointer;
+    }
+
+    .captcha {
+      position: absolute;
+      right: 10px;
+      bottom: 8px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid #d9d9d9;
+      background:
+        linear-gradient(135deg, #ffffff 35%, #eaf2ff 35% 60%, #ffffff 60%),
+        #fff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .bottom-copy {
+      padding: 28px 54px 70px;
+    }
+
+    @media (max-width: 900px) {
+      .top-copy,
+      .showcase,
+      .bottom-copy {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .top-copy ul,
+      .bottom-copy ul {
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 12px, 100%);
+        padding-top: 10px;
+      }
+
+      .top-copy {
+        padding: 28px 16px 34px;
+      }
+
+      .showcase {
+        padding: 26px 10px 34px;
+      }
+
+      .bottom-copy {
+        padding: 20px 16px 36px;
+      }
+
+      .top-copy h2,
+      .bottom-copy h2 {
+        font-size: 17px;
+      }
+
+      .top-copy ul,
+      .bottom-copy ul {
+        padding-left: 24px;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .phones {
+        gap: 12px;
+      }
+
+      .phone {
+        width: min(100%, 280px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+
+    <section class="sheet">
+      <div class="showcase">
+        <div class="phones">
+          <article class="phone">
+            <div class="phone-top">
+              <div class="back">&#8592;</div>
+              <div class="brand">
+                <div class="brand-mark">
+                  <span>Tran</span><span class="accent">S</span><span>Maa</span>
+                </div>
+                <h3>Welcome</h3>
+                <p>"Unlock your Journey"<br>Register Today</p>
+              </div>
+            </div>
+
+            <div class="phone-body">
+              <h4>Login</h4>
+              <div class="mobile-field">
+                <div class="country">+91</div>
+                <div class="number-icon">&#128222;</div>
+                <input id="phoneNumber" type="tel" placeholder="Enter your number" aria-label="Enter your number">
+              </div>
+              <div class="divider">OR</div>
+              <a class="link" href="#">Register A New Account</a>
+              <button class="send-otp" id="sendOtpButton" type="button">Send OTP</button>
+              <div class="captcha" aria-hidden="true"></div>
+            </div>
+          </article>
+
+          <article class="phone">
+            <div class="phone-top">
+              <div class="back">&#8592;</div>
+              <div class="brand" style="opacity: 0.35;">
+                <div class="brand-mark">
+                  <span>Tran</span><span class="accent">S</span><span>Maa</span>
+                </div>
+                <h3>Welcome</h3>
+              </div>
+            </div>
+
+            <div class="phone-body">
+              <div class="otp-title">Verify your Phone Number</div>
+              <div class="otp-row" aria-label="OTP digits">
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" value="3" aria-label="OTP digit 1">
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" value="3" aria-label="OTP digit 2">
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" value="3" aria-label="OTP digit 3">
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" value="2" aria-label="OTP digit 4">
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" value="6" aria-label="OTP digit 5">
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" value="8" aria-label="OTP digit 6">
+              </div>
+              <div class="otp-meta" id="otpTimer">93 seconds remaining</div>
+              <button class="resend" id="resendOtpButton" type="button">Resend OTP</button>
+              <div class="captcha" aria-hidden="true"></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="bottom-copy">
+        <h2>Driver-registration:</h2>
+        <ul>
+          <li>If I don't register as a driver I can't login as a driver so, i have to go through the registration process.</li>
+          <li>for the registration, i have to click on the register option, it will go to the registration screen.</li>
+          <li>here we have to enter our mobile number and otp sent to our mobile number.</li>
+          <li>In the next screen we have personal information there we have to give name, date of birth, gender, bio.</li>
+          <li>After clicking on the next button we will enter the experience &amp; data screen where we have to give photo, years of experience, vehicle type, vehicle model, vehicle number, DL Number, PAN Number.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const phoneNumberInput = document.getElementById("phoneNumber");
+    const sendOtpButton = document.getElementById("sendOtpButton");
+    const resendOtpButton = document.getElementById("resendOtpButton");
+    const otpTimer = document.getElementById("otpTimer");
+    const otpInputs = Array.from(document.querySelectorAll(".otp-box"));
+    const defaultOtp = ["3", "3", "3", "2", "6", "8"];
+    let remainingSeconds = 93;
+    let timerId;
+
+    function updateOtpTimer() {
+      if (remainingSeconds <= 0) {
+        otpTimer.textContent = "OTP expired";
+        resendOtpButton.disabled = false;
+        resendOtpButton.classList.add("active");
+        clearInterval(timerId);
+        return;
+      }
+
+      otpTimer.textContent = remainingSeconds + " seconds remaining";
+    }
+
+    function startOtpTimer() {
+      clearInterval(timerId);
+      remainingSeconds = 93;
+      resendOtpButton.disabled = true;
+      resendOtpButton.classList.remove("active");
+      updateOtpTimer();
+
+      timerId = setInterval(function() {
+        remainingSeconds -= 1;
+        updateOtpTimer();
+      }, 1000);
+    }
+
+    function fillDefaultOtp() {
+      otpInputs.forEach(function(input, index) {
+        input.value = defaultOtp[index];
+      });
+    }
+
+    phoneNumberInput.addEventListener("input", function() {
+      phoneNumberInput.value = phoneNumberInput.value.replace(/\D/g, "").slice(0, 10);
+    });
+
+    sendOtpButton.addEventListener("click", function() {
+      if (phoneNumberInput.value.length !== 10) {
+        alert("Please enter a valid 10 digit mobile number.");
+        phoneNumberInput.focus();
+        return;
+      }
+
+      fillDefaultOtp();
+      startOtpTimer();
+      otpInputs[0].focus();
+      otpInputs[0].select();
+    });
+
+    resendOtpButton.addEventListener("click", function() {
+      fillDefaultOtp();
+      startOtpTimer();
+      otpInputs[0].focus();
+      otpInputs[0].select();
+    });
+
+    otpInputs.forEach(function(input, index) {
+      input.addEventListener("input", function() {
+        input.value = input.value.replace(/\D/g, "").slice(0, 1);
+
+        if (input.value && index < otpInputs.length - 1) {
+          otpInputs[index + 1].focus();
+          otpInputs[index + 1].select();
+        }
+      });
+
+      input.addEventListener("keydown", function(event) {
+        if (event.key === "Backspace" && !input.value && index > 0) {
+          otpInputs[index - 1].focus();
+          otpInputs[index - 1].select();
+        }
+      });
+
+      input.addEventListener("focus", function() {
+        input.select();
+      });
+    });
+
+    fillDefaultOtp();
+    startOtpTimer();
+  </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 10 - Selecting The Loads</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #f7f2eb;
+      --paper: #fffdfa;
+      --paper-edge: #e8ddd0;
+      --ink: #2b211d;
+      --muted: #6d615c;
+      --danger: #a6362f;
+      --shadow: 0 3px 12px rgba(57, 35, 21, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(243, 228, 214, 0.76), rgba(255, 255, 255, 0) 8%, rgba(255, 255, 255, 0) 92%, rgba(243, 228, 214, 0.76)),
+        var(--page-bg);
+    }
+
+    .page {
+      width: min(1280px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 12px 0 20px;
+    }
+
+    .sheet {
+      min-height: 740px;
+      background: var(--paper);
+      border-top: 4px solid #efe4da;
+      border-bottom: 4px solid #d9ccc0;
+      box-shadow: var(--shadow);
+      padding: 74px 24px 54px;
+    }
+
+    .content {
+      max-width: 720px;
+      margin-left: 24px;
+    }
+
+    .heading {
+      margin: 0 0 6px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .notes {
+      margin: 0;
+      padding-left: 30px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .notes li {
+      margin-bottom: 6px;
+    }
+
+    .warning {
+      margin: 34px 0 0 54px;
+      max-width: 640px;
+      font-size: 16px;
+      line-height: 1.45;
+      color: var(--danger);
+      font-weight: 700;
+      white-space: pre-line;
+    }
+
+    @media (max-width: 900px) {
+      .content {
+        margin-left: 10px;
+      }
+
+      .heading,
+      .notes,
+      .warning {
+        font-size: 14px;
+      }
+
+      .warning {
+        margin-left: 42px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 12px, 100%);
+      }
+
+      .sheet {
+        min-height: auto;
+        padding: 30px 14px 28px;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+
+      .heading,
+      .notes,
+      .warning {
+        font-size: 13px;
+      }
+
+      .notes {
+        padding-left: 22px;
+      }
+
+      .warning {
+        margin: 24px 0 0 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="sheet">
+      <div class="content">
+        <h1 class="heading">selecting the loads:</h1>
+
+        <ul class="notes">
+          <li>Here driver's search for available loads on their route, such as from <br> Sircilla to Hyderabad.</li>
+          <li>If a load is available, it's shown as "available loads." If not, <br> suggestions are provided.</li>
+          <li>After showing the available load driver will click on accept and it will <br> navigate to another screen as accepted load. And stores in the <br> history page.</li>
+          <li>In Transmaa Staff Dashboard it will shows in driver's accepted order.</li>
+          <li>From there they will send confirmation messages to customers and <br> drivers.</li>
+          <li>After successful delivery of loads, the status will change to delivered <br> in driver application.</li>
+        </ul>
+
+        <div class="warning">Can one truck carry multiple customer loads?
+Can a smaller truck driver accept loads beyond his capacity?
+example: 1 tonne truck can accept 4 tonnes load??
+Where are the amount details entered? No billing details to be <br> entered even by Transmaa Staff??How will the truck driver accept <br>  the load without knowing the transportation cost?</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("keydown", function(event) {
+      if (event.key.toLowerCase() === "h") {
+        alert("Load selection notes screen");
+      }
+    });
+  </script>
+</body>
+</html>

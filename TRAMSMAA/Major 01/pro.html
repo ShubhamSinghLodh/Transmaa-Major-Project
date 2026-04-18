@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truck Booking</title>
+<link rel="stylesheet" href="pro.css">
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo">
+    <h1>Truck Booking</h1>
+  </header>
+
+  <div class="container" id="bookingPage">
+    <h2>Choose a Truck</h2>
+    <label for="date">Select Date and Time:</label>
+    <input type="datetime-local" id="date" value="2024-03-25T13:00">
+
+    <label for="goods">Goods Type:</label>
+    <select id="goods">
+      <option>House Shifting</option>
+      <option>Construction Material</option>
+      <option>Industrial Goods</option>
+    </select>
+
+    <label>Choose Trucks:</label>
+    <div class="truck-options">
+      <div class="truck-option" data-type="LCV (2.5–7 Tons)">LCV<br><small>2.5–7 Tons</small></div>
+      <div class="truck-option" data-type="Open (7–11 Tons)">Open<br><small>7–11 Tons</small></div>
+      <div class="truck-option" data-type="Dumper (9–16 Tons)">Dumper<br><small>9–16 Tons</small></div>
+      <div class="truck-option" data-type="Tipper (9–24 Tons)">Tipper<br><small>9–24 Tons</small></div>
+      <div class="truck-option" data-type="Container (9–30 Tons)">Container<br><small>9–30 Tons</small></div>
+      <div class="truck-option" data-type="Trailer (16–43 Tons)">Trailer<br><small>16–43 Tons</small></div>
+      <div class="truck-option" data-type="Trailer (20–36 Tons)">Trailer<br><small>20–36 Tons</small></div>
+    </div>
+
+    <button id="bookBtn">Book Pickup</button>
+  </div>
+
+  <div class="container confirmation" id="confirmationPage">
+    <h2>Confirm Details</h2>
+    <p><strong>Truck Type:</strong> <span id="confirmTruck"></span></p>
+    <p><strong>Date:</strong> <span id="confirmDate"></span></p>
+    <p><strong>Time:</strong> <span id="confirmTime"></span></p>
+    <p><strong>From Location:</strong> Sircilla, Sircilla mandal, Rajanna Sircilla District</p>
+    <p><strong>To Location:</strong> Hitech City, Hitec - Kukatpally Main Road, Kha</p>
+    <img src="truck.png" alt="Truck Image">
+    <button id="confirmBtn">Confirm Pickup</button>
+  </div>
+
+  <script>
+    const truckOptions = document.querySelectorAll('.truck-option');
+    let selectedTruck = null;
+
+    truckOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        truckOptions.forEach(o => o.classList.remove('active'));
+        option.classList.add('active');
+        selectedTruck = option.dataset.type;
+      });
+    });
+
+    document.getElementById('bookBtn').addEventListener('click', () => {
+      if (!selectedTruck) {
+        alert('Please select a truck type.');
+        return;
+      }
+      const dateInput = document.getElementById('date').value;
+      const dateObj = new Date(dateInput);
+      const dateStr = dateObj.toLocaleDateString();
+      const timeStr = dateObj.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+      document.getElementById('confirmTruck').textContent = selectedTruck;
+      document.getElementById('confirmDate').textContent = dateStr;
+      document.getElementById('confirmTime').textContent = timeStr;
+
+      document.getElementById('bookingPage').style.display = 'none';
+      document.getElementById('confirmationPage').style.display = 'block';
+    });
+
+    document.getElementById('confirmBtn').addEventListener('click', () => {
+      alert('Pickup confirmed!');
+    });
+  </script>
+</body>
+</html>

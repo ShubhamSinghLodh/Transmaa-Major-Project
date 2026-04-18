@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 14 - Truck And Driver Registration Flow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #f7f2eb;
+      --paper: #fffdfa;
+      --ink: #2b211d;
+      --danger: #a53a31;
+      --shadow: 0 3px 12px rgba(57, 35, 21, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(243, 228, 214, 0.76), rgba(255, 255, 255, 0) 8%, rgba(255, 255, 255, 0) 92%, rgba(243, 228, 214, 0.76)),
+        var(--page-bg);
+    }
+
+    .page {
+      width: min(1280px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 12px 0 20px;
+    }
+
+    .sheet {
+      min-height: 740px;
+      background: var(--paper);
+      border-top: 4px solid #efe4da;
+      border-bottom: 4px solid #d9ccc0;
+      box-shadow: var(--shadow);
+      padding: 74px 24px 54px;
+    }
+
+    .content {
+      max-width: 720px;
+      margin-left: 64px;
+      margin-top: 10px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .number-line {
+      margin: 0 0 6px 54px;
+      font-weight: 700;
+    }
+
+    .notes {
+      margin: 0;
+      padding-left: 30px;
+    }
+
+    .notes li {
+      margin-bottom: 10px;
+    }
+
+    .question {
+      margin: 18px 0 0 77px;
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .content {
+        margin-left: 20px;
+        font-size: 14px;
+      }
+
+      .number-line {
+        margin-left: 32px;
+      }
+
+      .question {
+        margin-left: 55px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 12px, 100%);
+      }
+
+      .sheet {
+        min-height: auto;
+        padding: 30px 14px 28px;
+      }
+
+      .content {
+        margin-left: 0;
+        font-size: 13px;
+      }
+
+      .number-line,
+      .question {
+        margin-left: 0;
+      }
+
+      .notes {
+        padding-left: 22px;
+      }
+
+      .question {
+        margin-top: 16px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="sheet">
+      <div class="content">
+        <p class="number-line">2.</p>
+
+        <ul class="notes">
+          <li>Transmaa contacts interested buyers to provide vehicle details and <br> facilitate the purchasing process.</li>
+        </ul>
+
+        <p class="question">Truck and driver registration user flow ?</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("keydown", function(event) {
+      if (event.key.toLowerCase() === "u") {
+        alert("Truck and driver registration user flow note");
+      }
+    });
+  </script>
+</body>
+</html>

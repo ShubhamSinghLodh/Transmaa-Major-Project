@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 12 - Finance And Insurance Enquiry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #f7f2eb;
+      --paper: #fffdfa;
+      --ink: #241a16;
+      --muted: #6f625d;
+      --frame: #6d625d;
+      --line: #e9dfd7;
+      --header-bg: #f7f6f4;
+      --field-border: #d9d3cd;
+      --shadow: 0 8px 18px rgba(53, 32, 21, 0.08);
+      --finance: #4fbb5a;
+      --insurance: #ff9f0a;
+      --button: #4c4850;
+      --nav-accent: #e0a72c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(243, 228, 214, 0.76), rgba(255, 255, 255, 0) 8%, rgba(255, 255, 255, 0) 92%, rgba(243, 228, 214, 0.76)),
+        var(--page-bg);
+    }
+
+    .page {
+      width: min(1280px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 18px 0 32px;
+    }
+
+    .sheet {
+      min-height: 740px;
+      background: var(--paper);
+      border-top: 4px solid #efe4da;
+      border-bottom: 4px solid #d9ccc0;
+      box-shadow: 0 3px 12px rgba(57, 35, 21, 0.08);
+      padding: 62px 36px 64px;
+    }
+
+    .copy {
+      max-width: 760px;
+      margin: 0 auto 18px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .copy h1 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .copy ul {
+      margin: 0;
+      padding-left: 28px;
+    }
+
+    .copy li {
+      margin-bottom: 5px;
+    }
+
+    .phones {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      max-width: 376px;
+      margin: 0 auto;
+    }
+
+    .phone {
+      position: relative;
+      width: 184px;
+      min-height: 440px;
+      border: 2px solid var(--frame);
+      background: #fff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .phone-header {
+      min-height: 26px;
+      padding: 6px 8px 4px;
+      border-bottom: 1px solid var(--line);
+      background: var(--header-bg);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 1px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #2d211c;
+      text-transform: uppercase;
+      transform: skewX(-10deg);
+      letter-spacing: 0.15px;
+    }
+
+    .brand-mark .accent {
+      color: #ea6a30;
+    }
+
+    .info {
+      color: #8b817c;
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    .content {
+      padding: 10px 10px 42px;
+      background: linear-gradient(180deg, #ffffff 0 82%, #f3f1f1 82% 100%);
+      min-height: 412px;
+    }
+
+    .title {
+      margin: 0 0 10px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #4b403c;
+    }
+
+    .toggle-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .pill {
+      flex: 1;
+      min-height: 20px;
+      border: 0;
+      border-radius: 999px;
+      color: #fff;
+      font: 600 7px/1 "Poppins", sans-serif;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(50, 34, 24, 0.1);
+    }
+
+    .pill.finance {
+      background: var(--finance);
+    }
+
+    .pill.insurance {
+      background: var(--insurance);
+    }
+
+    .pill.inactive {
+      opacity: 0.65;
+    }
+
+    .field {
+      margin-bottom: 8px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 7px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      min-height: 22px;
+      border: 2px solid var(--field-border);
+      border-radius: 4px;
+      background: #fff;
+      padding: 5px 7px;
+      font: 500 8px/1.2 "Poppins", sans-serif;
+      color: #6b615c;
+      outline: none;
+    }
+
+    .field select {
+      appearance: none;
+      background:
+        linear-gradient(45deg, transparent 50%, #8a7b73 50%),
+        linear-gradient(135deg, #8a7b73 50%, transparent 50%),
+        linear-gradient(to right, transparent, transparent);
+      background-position:
+        calc(100% - 12px) calc(50% - 1px),
+        calc(100% - 8px) calc(50% - 1px),
+        0 0;
+      background-size: 4px 4px, 4px 4px, 100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 68px;
+      min-height: 20px;
+      margin: 14px auto 0;
+      border: 0;
+      border-radius: 999px;
+      background: var(--button);
+      color: #fff;
+      font: 600 7px/1 "Poppins", sans-serif;
+      cursor: pointer;
+    }
+
+    .nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 34px;
+      background: #f6f4f4;
+      border-top: 1px solid #ece7e2;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      color: #8a817c;
+      font-size: 6px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .nav-item.active {
+      color: var(--nav-accent);
+      font-weight: 700;
+    }
+
+    .captcha {
+      position: absolute;
+      right: 4px;
+      bottom: 4px;
+      width: 18px;
+      height: 18px;
+      border: 1px solid #dcdcdc;
+      background:
+        linear-gradient(135deg, #ffffff 35%, #e7f1ff 35% 62%, #ffffff 62%),
+        #fff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    @media (max-width: 900px) {
+      .copy {
+        font-size: 14px;
+      }
+
+      .copy h1 {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 12px, 100%);
+        padding-top: 10px;
+      }
+
+      .sheet {
+        padding: 24px 12px 28px;
+      }
+
+      .copy {
+        font-size: 13px;
+      }
+
+      .phones {
+        grid-template-columns: 1fr;
+        max-width: 184px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="sheet">
+      <div class="copy">
+        <h1>4. Finance and Insurance Enquiry form :</h1>
+        <ul>
+          <li>Transmaa offers finance and insurance services for vehicles.</li>
+          <li>here if the customer or the driver are interested to take the insurance or the finance</li>
+          <li>Here is the enquiry form for finance and insurance.</li>
+          <li>we have to give our basic details for enquiry like name, phone number, type of vehicle, Rc number. and after filling the details we will click on the submit button. These details will go to Transmaa-staff.</li>
+          <li>These details will be seen in the Transmaa-Staff. from there Transmaa-staff will directly contact that person.</li>
+        </ul>
+      </div>
+
+      <div class="phones">
+        <article class="phone">
+          <div class="phone-header">
+            <div class="brand-mark">
+              <span>Tran</span><span class="accent">S</span><span>Maa</span>
+            </div>
+            <span class="info">&#9432;</span>
+          </div>
+
+          <div class="content">
+            <h2 class="title">Commercial Vehicles</h2>
+
+            <div class="toggle-row">
+              <button class="pill finance" id="leftFinanceBtn" type="button">Finance</button>
+              <button class="pill insurance inactive" id="leftInsuranceBtn" type="button">Insurance</button>
+            </div>
+
+            <form id="leftForm">
+              <div class="field">
+                <label for="leftName">Name</label>
+                <input id="leftName" type="text" aria-label="Name">
+              </div>
+
+              <div class="field">
+                <label for="leftPhone">Phone Number</label>
+                <input id="leftPhone" type="tel" aria-label="Phone Number">
+              </div>
+
+              <div class="field">
+                <label for="leftVehicle">Type of Vehicle</label>
+                <input id="leftVehicle" type="text" aria-label="Type of Vehicle">
+              </div>
+
+              <div class="field">
+                <label for="leftRc">RC Number</label>
+                <input id="leftRc" type="text" aria-label="RC Number">
+              </div>
+
+              <button class="submit-btn" type="submit">Submit</button>
+            </form>
+          </div>
+
+          <div class="nav">
+            <div class="nav-item"><span>&#8962;</span><span>Loads</span></div>
+            <div class="nav-item"><span>&#128197;</span><span>Sell & Buy</span></div>
+            <div class="nav-item active"><span>&#128663;</span><span>Finance & <br> Insurance</span></div>
+            <div class="nav-item"><span>&#128214;</span><span>Fuel</span></div>
+            <div class="nav-item"><span>&#128100;</span><span>Me</span></div>
+          </div>
+          <div class="captcha" aria-hidden="true"></div>
+        </article>
+
+        <article class="phone">
+          <div class="phone-header">
+            <div class="brand-mark">
+              <span>Tran</span><span class="accent">S</span><span>Maa</span>
+            </div>
+            <span class="info">&#9432;</span>
+          </div>
+
+          <div class="content">
+            <h2 class="title">Commercial Vehicles</h2>
+
+            <div class="toggle-row">
+              <button class="pill insurance" id="rightFinanceBtn" type="button">Finance</button>
+              <button class="pill finance" id="rightInsuranceBtn" type="button">Insurance</button>
+            </div>
+
+            <form id="rightForm">
+              <div class="field">
+                <label for="rightName">Name</label>
+                <input id="rightName" type="text" aria-label="Name">
+              </div>
+
+              <div class="field">
+                <label for="rightPhone">Phone Number</label>
+                <input id="rightPhone" type="tel" aria-label="Phone Number">
+              </div>
+
+              <div class="field">
+                <label for="rightVehicle">Type of Vehicle</label>
+                <input id="rightVehicle" type="text" aria-label="Type of Vehicle">
+              </div>
+
+              <div class="field">
+                <label for="rightRc">RC Number</label>
+                <input id="rightRc" type="text" aria-label="RC Number">
+              </div>
+
+              <button class="submit-btn" type="submit">Submit</button>
+            </form>
+          </div>
+
+          <div class="nav">
+            <div class="nav-item"><span>&#8962;</span><span>Loads</span></div>
+            <div class="nav-item"><span>&#128197;</span><span>Sell & Buy</span></div>
+            <div class="nav-item active"><span>&#128663;</span><span>Finance & <br> Insurance</span></div>
+            <div class="nav-item"><span>&#128214;</span><span>Fuel</span></div>
+            <div class="nav-item"><span>&#128100;</span><span>Me</span></div>
+          </div>
+          <div class="captcha" aria-hidden="true"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const leftFinanceBtn = document.getElementById("leftFinanceBtn");
+    const leftInsuranceBtn = document.getElementById("leftInsuranceBtn");
+    const rightFinanceBtn = document.getElementById("rightFinanceBtn");
+    const rightInsuranceBtn = document.getElementById("rightInsuranceBtn");
+    const leftForm = document.getElementById("leftForm");
+    const rightForm = document.getElementById("rightForm");
+
+    function togglePills(activeButton, inactiveButton, activeColorClass, inactiveColorClass) {
+      activeButton.classList.remove("inactive");
+      inactiveButton.classList.add("inactive");
+      activeButton.className = "pill " + activeColorClass;
+      inactiveButton.className = "pill " + inactiveColorClass + " inactive";
+    }
+
+    leftFinanceBtn.addEventListener("click", function() {
+      togglePills(leftFinanceBtn, leftInsuranceBtn, "finance", "insurance");
+    });
+
+    leftInsuranceBtn.addEventListener("click", function() {
+      togglePills(leftInsuranceBtn, leftFinanceBtn, "insurance", "finance");
+    });
+
+    rightFinanceBtn.addEventListener("click", function() {
+      togglePills(rightFinanceBtn, rightInsuranceBtn, "insurance", "finance");
+    });
+
+    rightInsuranceBtn.addEventListener("click", function() {
+      togglePills(rightInsuranceBtn, rightFinanceBtn, "finance", "insurance");
+    });
+
+    leftForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      alert("Finance enquiry submitted.");
+    });
+
+    rightForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      alert("Insurance enquiry submitted.");
+    });
+  </script>
+</body>
+</html>

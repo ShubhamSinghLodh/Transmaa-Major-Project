@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Flow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #f6f3ef;
+      --paper: #fffdf9;
+      --paper-edge: #eadbc8;
+      --ink: #231814;
+      --muted: #75675e;
+      --accent: #f2a74b;
+      --accent-soft: #fde5d3;
+      --dark-panel: rgba(19, 14, 15, 0.72);
+      --line: rgba(92, 60, 38, 0.14);
+      --success: #4aca74;
+      --danger: #f26a5f;
+      --otp-fill: #f6a5b1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background:
+        linear-gradient(90deg, rgba(244, 229, 214, 0.75), rgba(255, 255, 255, 0) 8%, rgba(255, 255, 255, 0) 92%, rgba(244, 229, 214, 0.75)),
+        var(--page-bg);
+      color: var(--ink);
+    }
+
+    .page {
+      width: min(1280px, calc(100% - 34px));
+      margin: 0 auto;
+      padding: 34px 0 54px;
+    }
+
+    .sheet {
+      background: var(--paper);
+      border-top: 4px solid #ede4da;
+      border-bottom: 4px solid #d7ccc0;
+      box-shadow: 0 3px 12px rgba(48, 31, 18, 0.08);
+      padding: 46px 48px 42px;
+      min-height: 520px;
+    }
+
+    .sheet + .sheet {
+      margin-top: 40px;
+    }
+
+    .dashboard-stack {
+      display: grid;
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    .dashboard-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(122, 92, 68, 0.26);
+      background:
+        linear-gradient(180deg, rgba(255, 193, 112, 0.18), rgba(19, 14, 15, 0.18)),
+        url("img01.jpeg") center/cover no-repeat;
+      box-shadow: 0 10px 20px rgba(43, 24, 13, 0.12);
+    }
+
+    .dashboard-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.28));
+      pointer-events: none;
+    }
+
+    .dashboard-inner {
+      position: relative;
+      z-index: 1;
+      margin: 14px;
+      padding: 14px 14px 12px;
+      background: var(--dark-panel);
+      border-top: 2px solid rgba(250, 180, 91, 0.95);
+      border-bottom: 2px solid rgba(250, 180, 91, 0.95);
+      color: #f4efe8;
+    }
+
+    .dashboard-copy {
+      font-size: 11px;
+      line-height: 1.42;
+    }
+
+    .dashboard-copy p {
+      margin: 0 0 3px;
+    }
+
+    .dashboard-copy strong {
+      color: #ffd75b;
+      font-weight: 700;
+    }
+
+    .dashboard-action {
+      position: absolute;
+      top: 75px;
+      right: 32px;
+      z-index: 2;
+      border: 0;
+      border-radius: 999px;
+      padding: 5px 14px;
+      background: #ffffff;
+      color: #5a4d47;
+      font: 600 10px/1 "Poppins", sans-serif;
+      box-shadow: 0 6px 10px rgba(24, 18, 12, 0.18);
+    }
+
+    .dashboard-title {
+      margin: -2px 0 0;
+      text-align: center;
+      font-size: 12px;
+      color: #f9edd8;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
+
+    .driver-copy {
+      margin-top: 92px;
+      max-width: 780px;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .driver-copy h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .driver-copy ul {
+      margin: 0;
+      padding-left: 26px;
+    }
+
+    .driver-copy li {
+      margin-bottom: 10px;
+    }
+
+    .driver-copy strong {
+      font-weight: 700;
+    }
+
+    .driver-copy .warn {
+      color: #872d23;
+      font-weight: 700;
+    }
+
+    .phones {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(270px, 1fr));
+      gap: 34px;
+      align-items: start;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .phone {
+      position: relative;
+      background: #fff7f1;
+      border: 3px solid rgba(83, 55, 40, 0.62);
+      min-height: 500px;
+      padding: 18px 18px 20px;
+      box-shadow: 0 14px 24px rgba(59, 36, 22, 0.08);
+    }
+
+    .phone::before,
+    .phone::after {
+      content: "*";
+      position: absolute;
+      top: 8px;
+      color: #8b6a55;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .phone::before {
+      left: 10px;
+    }
+
+    .phone::after {
+      right: 10px;
+    }
+
+    .brand {
+      margin-top: 44px;
+      text-align: center;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #2e241f;
+      text-transform: uppercase;
+    }
+
+    .brand-mark .brand-accent {
+      color: #e2a23f;
+      transform: skewX(-12deg);
+      display: inline-block;
+    }
+
+    .brand h3 {
+      margin: 12px 0 6px;
+      font-size: 33px;
+      line-height: 1;
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .phone-login {
+      margin-top: 54px;
+      text-align: center;
+    }
+
+    .phone-login h4,
+    .phone-verify h4 {
+      margin: 0 0 18px;
+      font-size: 22px;
+    }
+
+    .phone-field {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 14px;
+      border: 2px solid #ebddd1;
+      background: #fff;
+      font: 500 14px/1 "Poppins", sans-serif;
+      color: #4a3a32;
+      outline: none;
+    }
+
+    .phone-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #7b6e66;
+      font-size: 12px;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .phone-verify {
+      margin-top: 72px;
+      text-align: center;
+    }
+
+    .otp-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .otp-input {
+      width: 34px;
+      height: 42px;
+      border: 0;
+      background: var(--otp-fill);
+      color: #fff;
+      text-align: center;
+      font: 700 18px/1 "Poppins", sans-serif;
+      outline: none;
+      box-shadow: inset 0 -2px 0 rgba(255, 255, 255, 0.22);
+    }
+
+    .otp-input:focus {
+      background: #ef7d91;
+    }
+
+    .status-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #fff2e6;
+      color: #8b5b31;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 5px rgba(74, 202, 116, 0.12);
+    }
+
+    @media (max-width: 900px) {
+      .sheet {
+        padding: 28px 20px 30px;
+      }
+
+      .driver-copy {
+        margin-top: 56px;
+        font-size: 15px;
+      }
+
+      .phones {
+        grid-template-columns: 1fr;
+        max-width: 360px;
+      }
+
+      .phone {
+        min-height: 440px;
+      }
+
+      .brand h3 {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 14px, 100%);
+        padding-top: 16px;
+      }
+
+      .sheet {
+        padding: 18px 12px 22px;
+      }
+
+      .dashboard-inner {
+        margin: 10px;
+        padding: 10px 10px 8px;
+      }
+
+      .dashboard-copy {
+        font-size: 8.7px;
+      }
+
+      /* Delivered Button */
+      .dashboard-action {
+        top: 8px;
+        right: 8px;
+        padding: 4px 10px;
+        font-size: 8px;
+      }
+
+      .driver-copy {
+        margin-top: 42px;
+        font-size: 13px;
+      }
+
+      .driver-copy h2 {
+        font-size: 18px;
+      }
+
+      .phone {
+        min-height: 390px;
+        padding: 14px 14px 18px;
+      }
+
+      .brand {
+        margin-top: 30px;
+      }
+
+      .brand-mark {
+        font-size: 20px;
+      }
+
+      .brand h3 {
+        font-size: 24px;
+      }
+
+      .phone-login,
+      .phone-verify {
+        margin-top: 42px;
+      }
+
+      .phone-login h4,
+      .phone-verify h4 {
+        font-size: 18px;
+      }
+
+      .otp-input {
+        width: 28px;
+        height: 36px;
+        font-size: 16px;
+      }
+    }
+
+    h3{
+        margin-left:500px;
+        font-size: 20px;
+        color: white;
+        margin-top: -2px;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="sheet">
+      <div class="dashboard-stack">
+          <article class="dashboard-card">
+            <h3>Driver's Accepted Order's</h3>
+          <button class="dashboard-action" type="button">Send Message</button>
+          <div class="dashboard-inner">
+            <div class="dashboard-copy">
+              <p><strong>Customer Name:</strong> </p>
+              <p> <b>Customer Phone Number:</b> </p>
+              <p><strong>Driver name: saiteja</strong> </p>
+              <p><b>Driver Phone Number: +917093124579</b> </p>
+              <p><b>Status: Accepted </b> </p>
+              <p>Goods Type: House Shifting </p>
+              <p>Date: 2024-03-25 13:00:38.943</p>
+              <p>timeTimeOfDay: (13:00)</p>
+              <p>From: Sircilla, Sircilla mandal, Rajanna Sircilla District, Telangana, 505301, India</p>
+              <p>To: Hitech City, Hitec-Kukatpally Main Road, Khanmet, Ward 116 Allapur,Greater Hyderabad Municipal Corporation West Zone, Hyderabad, Kukatpally mandal, Mrdchal-Malkajgiri District, Telangana, 500081,<br> India</p>
+              <p><strong>Truck Details:</strong></p>
+              <p>Truck Name: Open</p>
+              <p>Truck Price: null</p>
+              <p>Truck Weight Capacity: null</p>
+            </div>
+          </div>
+        </article>
+
+        
+        <article class="dashboard-card">
+            <h3>Order's is on the way</h3>
+            <!-- <div class="dashboard-title">Order's is on the way</div> -->
+          <button class="dashboard-action" type="button">Delivered</button>
+          <div class="dashboard-inner">
+            <div class="dashboard-copy">
+              <p><strong>Customer Name:</strong></p>
+              <p><b>Customer Phone Number:</b> </p>
+              <p><strong>Driver name: saiteja</strong> </p>
+              <p><b>Driver Phone Number: +917093124579</b> </p>
+              <p><b>Status: Order's to be delivered </b> </p>
+              <p>Goods Type: House Shifting </p>
+              <p>Date: 2024-03-25 13:00:38.943</p>
+              <p>timeTimeOfDay: (13:00)</p>
+              <p>From: Sircilla, Sircilla mandal, Rajanna Sircilla District, Telangana, 505301, India</p>
+              <p>To: Hitech City, Hitec-Kukatpally Main Road, Khanmet, Ward 116 Allapur,Greater Hyderabad Municipal Corporation West Zone, Hyderabad, Kukatpally mandal, Mrdchal-Malkajgiri District, Telangana,  <br> 500081, India</p>
+              <p><strong>Truck Details:</strong></p>
+              <p>Truck Name: Open</p>
+              <p>Truck Price: null</p>
+              <p>Truck Weight Capacity: 7-11</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <section class="driver-copy">
+        <h2>3. Driver:</h2>
+        <ul>
+          <li>Here I am the driver i have already registered I can login using mobile <br> number and otp.</li>
+          <li>If I don't register I have to go through the registration process and <br> without registering if I try to login i will get a message as <strong>"this Phone number <br> is not registered. Please register"</strong>.</li>
+          <li>If I register and the verification process is going on through the <br>    Transmaa-staff I will get a pop-up message as <strong>"your verification is in progress"</strong>.</li>
+          <li>If Transmaa-Staff rejects my profile will get the pop-up message as <br> <b >"This number got rejected"</b>.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- <section class="sheet">
+      <div class="phones">
+        <article class="phone">
+          <div class="brand">
+            <div class="brand-mark">
+              <span>Tran</span><span class="brand-accent">S</span><span>maa</span>
+            </div>
+            <h3>Welcome</h3>
+            <p>Login/Register Today</p>
+          </div>
+
+          <div class="phone-login">
+            <h4>Login</h4>
+            <input class="phone-field" type="tel" value="+91 70931 24579" aria-label="Phone number">
+            <a class="phone-link" href="#">Create a New Account</a>
+          </div>
+        </article>
+
+        <article class="phone">
+          <div class="brand">
+            <div class="brand-mark" style="opacity: 0.2;">
+              <span>Tran</span><span class="brand-accent">S</span><span>maa</span>
+            </div>
+            <h3>Welcome</h3>
+          </div>
+
+          <div class="phone-verify">
+            <h4>Verify your Phone Number</h4>
+            <div class="otp-row" id="otpRow">
+              <input class="otp-input" type="text" inputmode="numeric" maxlength="1" value="8" aria-label="OTP digit 1">
+              <input class="otp-input" type="text" inputmode="numeric" maxlength="1" value="5" aria-label="OTP digit 2">
+              <input class="otp-input" type="text" inputmode="numeric" maxlength="1" value="0" aria-label="OTP digit 3">
+              <input class="otp-input" type="text" inputmode="numeric" maxlength="1" value="0" aria-label="OTP digit 4">
+              <input class="otp-input" type="text" inputmode="numeric" maxlength="1" value="4" aria-label="OTP digit 5">
+              <input class="otp-input" type="text" inputmode="numeric" maxlength="1" value="5" aria-label="OTP digit 6">
+            </div>
+            <div class="status-strip">
+              <span class="status-dot" aria-hidden="true"></span>
+              OTP verified
+            </div>
+          </div>
+        </article> 
+      </div>
+    </section>-->
+  </main>
+
+  <script>
+    const otpInputs = Array.from(document.querySelectorAll(".otp-input"));
+
+    otpInputs.forEach(function(input, index) {
+      input.addEventListener("input", function() {
+        input.value = input.value.replace(/\D/g, "").slice(0, 1);
+
+        if (input.value && index < otpInputs.length - 1) {
+          otpInputs[index + 1].focus();
+          otpInputs[index + 1].select();
+        }
+      });
+
+      input.addEventListener("keydown", function(event) {
+        if (event.key === "Backspace" && !input.value && index > 0) {
+          otpInputs[index - 1].focus();
+          otpInputs[index - 1].select();
+        }
+      });
+
+      input.addEventListener("focus", function() {
+        input.select();
+      });
+    });
+  </script>
+</body>
+</html>
